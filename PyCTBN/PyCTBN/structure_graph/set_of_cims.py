@@ -47,13 +47,13 @@ class SetOfCims(object):
         """Initializes at the correct dimensions the state residence times matrix and the state transition matrices.
         """
         if not self._parents_states_number:
-            self._state_residence_times = np.zeros((1, self._node_states_number), dtype=np.float)
-            self._transition_matrices = np.zeros((1, self._node_states_number, self._node_states_number), dtype=np.int)
+            self._state_residence_times = np.zeros((1, self._node_states_number), dtype=np.float64)
+            self._transition_matrices = np.zeros((1, self._node_states_number, self._node_states_number), dtype=np.int64)
         else:
             self._state_residence_times = \
-                np.zeros((np.prod(self._parents_states_number), self._node_states_number), dtype=np.float)
+                np.zeros((np.prod(self._parents_states_number), self._node_states_number), dtype=np.float64)
             self._transition_matrices = np.zeros([np.prod(self._parents_states_number), self._node_states_number,
-                                                  self._node_states_number], dtype=np.int)
+                                                  self._node_states_number], dtype=np.int64)
 
     def build_cims(self, state_res_times: np.ndarray, transition_matrices: np.ndarray) -> None:
         """Build the ``ConditionalIntensityMatrix`` objects given the state residence times and transitions matrices.

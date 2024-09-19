@@ -82,7 +82,7 @@ class ParametersEstimator(object):
         :type T: numpy.ndArray
         """
         T[:] = np.bincount(np.sum(trajectory[:, cols_filter] * scalar_indexes_struct / scalar_indexes_struct[0], axis=1)
-                           .astype(np.int), \
+                           .astype(np.int64), \
                            times,
                            minlength=scalar_indexes_struct[-1]).reshape(-1, T.shape[1])
 
@@ -104,8 +104,8 @@ class ParametersEstimator(object):
         """
         diag_indices = np.array([x * M.shape[1] + x % M.shape[1] for x in range(M.shape[0] * M.shape[1])],
                                 dtype=np.int64)
-        trj_tmp = trajectory[trajectory[:, int(trajectory.shape[1] / 2) + node_indx].astype(np.int) >= 0]
-        M[:] = np.bincount(np.sum(trj_tmp[:, cols_filter] * scalar_indexing / scalar_indexing[0], axis=1).astype(np.int)
+        trj_tmp = trajectory[trajectory[:, int(trajectory.shape[1] / 2) + node_indx].astype(np.int64) >= 0]
+        M[:] = np.bincount(np.sum(trj_tmp[:, cols_filter] * scalar_indexing / scalar_indexing[0], axis=1).astype(np.int64)
                            , minlength=scalar_indexing[-1]).reshape(-1, M.shape[1], M.shape[2])
         M_raveled = M.ravel()
         M_raveled[diag_indices] = 0

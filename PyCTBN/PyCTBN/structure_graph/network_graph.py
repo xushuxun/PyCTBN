@@ -163,7 +163,7 @@ class NetworkGraph(object):
         """
         T_vector = np.array([node_states])
         T_vector = np.append(T_vector, parents_vals)
-        T_vector = T_vector.cumprod().astype(np.int)
+        T_vector = T_vector.cumprod().astype(np.int64)
         return T_vector
 
     @staticmethod
@@ -181,7 +181,7 @@ class NetworkGraph(object):
         M_vector = np.array([node_states_number,
                              node_states_number])
         M_vector = np.append(M_vector, parents_vals)
-        M_vector = M_vector.cumprod().astype(np.int)
+        M_vector = M_vector.cumprod().astype(np.int64)
         return M_vector
 
     @staticmethod
@@ -197,7 +197,7 @@ class NetworkGraph(object):
         :return: The filtering structure for times estimation
         :rtype: numpy.ndArray
         """
-        return np.append(np.array([node_indx], dtype=np.int), p_indxs).astype(np.int)
+        return np.append(np.array([node_indx], dtype=np.int64), p_indxs).astype(np.int64)
 
     @staticmethod
     def build_transition_filtering_for_a_node(node_indx: int, p_indxs: typing.List, nodes_number: int) \
@@ -214,7 +214,7 @@ class NetworkGraph(object):
         :return: The filtering structure for transitions estimation
         :rtype: numpy.ndArray
         """
-        return np.array([node_indx + nodes_number, node_indx, *p_indxs], dtype=np.int)
+        return np.array([node_indx + nodes_number, node_indx, *p_indxs], dtype=np.int64)
 
     @staticmethod
     def build_p_comb_structure_for_a_node(parents_values: typing.List) -> np.ndarray:
@@ -237,7 +237,7 @@ class NetworkGraph(object):
                 parents_comb[:, 1] = parents_comb[:, 0].copy()
                 parents_comb[:, 0] = tmp_comb
         else:
-            parents_comb = np.array([[]], dtype=np.int)
+            parents_comb = np.array([[]], dtype=np.int64)
         return parents_comb
 
     def get_parents_by_id(self, node_id) -> typing.List:

@@ -123,7 +123,7 @@ class TestSetOfCims(unittest.TestCase):
                 parents_comb[:, 1] = parents_comb[:, 0].copy()
                 parents_comb[:, 0] = tmp_comb
         else:
-            parents_comb = np.array([[]], dtype=np.int)
+            parents_comb = np.array([[]], dtype=np.int64)
         return parents_comb
 
     def another_filtering_method(self,p_combs, mask, parent_value):

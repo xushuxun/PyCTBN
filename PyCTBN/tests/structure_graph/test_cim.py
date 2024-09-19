@@ -24,13 +24,13 @@ class TestConditionalIntensityMatrix(unittest.TestCase):
             state_transition_matrix = self.state_transition_matrix)
         self.assertTrue(np.array_equal(self.state_res_times, c1.state_residence_times))
         self.assertTrue(np.array_equal(self.state_transition_matrix, c1.state_transition_matrix))
-        self.assertEqual(c1.cim.dtype, np.float)
+        self.assertEqual(c1.cim.dtype, np.float64)
         self.assertEqual(self.state_transition_matrix.shape, c1.cim.shape)
 
     def test_compute_cim_coefficients(self):
         c1 = ConditionalIntensityMatrix(state_residence_times = self.state_res_times, 
             state_transition_matrix = self.state_transition_matrix)
-        c2 = self.state_transition_matrix.astype(np.float)
+        c2 = self.state_transition_matrix.astype(np.float64)
         np.fill_diagonal(c2, c2.diagonal() * -1)
         for i in range(0, len(self.state_res_times)):
             for j in range(0, len(self.state_res_times)):
